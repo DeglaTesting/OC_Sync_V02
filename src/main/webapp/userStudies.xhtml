@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <script name="jquery/jquery.js" library="primefaces"></script>
+        <link rel='stylesheet' type='text/css' href='stylesheet.css'/>
+    </h:head>
+    <h:form enctype="multipart/form-data">
+        <p:growl id="messages" showDetail="true" autoUpdate="true" />
+        <h3 style="color: #1565C0; margin-left: 30px; margin-top: 50px">Please upload your source study:</h3>
+        <p:fileUpload fileUploadListener="#{FileUpload.uploadSourceFile}"  multiple="false" fileLimit="1" allowTypes="/(\.|\/)(xml)$/" widgetVar="fileupload1" update="@widgetVar(map)" style="margin: 20px"/>  
+    </h:form>
+    <h:form>
+        <p:growl id="message" />
+        <p:commandButton type="submit"  style=" margin: 40px" value="Reset" icon="ui-icon-arrowrefresh-1-w" update="@widgetVar(fileupload1)" 
+                         action="#{UserClick.setFormLodder('Reset')}" ajax="false"/> 
+        <p:commandButton type="submit"  style=" margin: 20px" value="Map" icon="ui-icon-circle-triangle-e" update="ui" widgetVar="map" 
+                         actionListener="#{CollectingMetaData.doMapping()}" ajax="false" /> 
+        <ui:include src="#{UserClick.getFormLodder()}" id="ui"/>
+    </h:form>
+</html> 

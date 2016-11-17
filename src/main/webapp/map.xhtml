@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <p:dataTable var="StructureModel" value="#{StructureView.getlstructureModel()}" sortBy="#{StructureModel.type}" sortOrder="descending" scrollable="true"  
+                 rowStyleClass="#{StructureModel.type eq 'Item' ? 'itemColor':''} #{StructureModel.type eq 'ItemGroup' ? 'groupColor':''} #{StructureModel.type eq 'StudyEvent' ? 'eventColor':''} #{StructureModel.type eq 'StudyEventForm' ? 'eventFormColor':''}">
+        <p:column headerText="Node name">
+            <h:outputText value="#{StructureModel.type}"/>
+        </p:column>
+        <p:column headerText="Name">
+            <h:outputText value="#{StructureModel.name}" />
+        </p:column>
+        <p:column headerText="Source OID">
+            <h:outputText value="#{StructureModel.sourceOID}" />
+        </p:column>
+        <p:column headerText="Target OID">
+            <h:outputText value="#{StructureModel.targetOID}" />
+        </p:column>
+    </p:dataTable>   
+    <ui:repeat var="item" value="#{EmptyFieldView.getlEmptyField()}"><h3 style="color: #009688"> This field in the target Study can not be matched:</h3> #{item}</ui:repeat>
+</ui:composition>

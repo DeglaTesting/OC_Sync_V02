@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:form>
+        <p:growl id="growl" showDetail="true" autoUpdate="true" />
+        <p:panel header="Login" style="width:25%; margin-top: 5%; margin-left:30%">
+            <h:panelGrid columns="2" style="margin-top:10px;">
+                <h:outputLabel for="username" value="Username:" style="margin-right: 20px"/>
+                <p:inputText id="username" value="#{UserLogin.username}" placeholder="name@123" rendered="true"/>
+                <h:outputLabel for="password" value="Password:" style="margin-right: 20px"/>
+                <p:password id="password" value="#{UserLogin.password}" placeholder="*******"  rendered="true"/>
+            </h:panelGrid>
+            <h:panelGrid columns="2" style="margin-top:50px;">
+                <h:outputText value="Please choose an OC instance :"/>  
+                <p:selectOneMenu value="#{OcInstance.instance}">
+                    <f:selectItem itemLabel="Choose One" itemValue="" />
+                    <f:selectItem itemLabel="OC_Play" itemValue="OC_Play" />
+                    <f:selectItem itemLabel="OC_Design" itemValue="OC_Design" />
+                    <f:selectItem itemLabel="OC_Live" itemValue="OC_Live" />
+                </p:selectOneMenu>
+            </h:panelGrid>
+            <h:panelGrid columns="2" style="margin-top:20px">
+                <h:outputText style="margin-right:255px"/>  
+                <p:commandButton value="Login" update="growl"  type="submit" actionListener="#{UserLogin.login}"/>
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+</ui:composition>
+
