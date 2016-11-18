@@ -9,9 +9,12 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+import org.primefaces.event.MenuActionEvent;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
+import org.primefaces.model.menu.MenuItem;
 import org.primefaces.model.menu.MenuModel;
 import org.rdcit.ocSync.model.Study;
 
@@ -35,7 +38,8 @@ public class UserStudiesList {
         for (int i = 0; i < luserStudy.size(); i++) {
             DefaultMenuItem item = new DefaultMenuItem(luserStudy.get(i).getStudy_name());
             FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("Study_upID", luserStudy.get(i).getStudy_u_p_id());
-            item.setCommand("#{StudyMetaData_ws.getStudyMetaData()}");
+            String command = String.format("#{StudyMetaData_ws.getStudyMetaData('%s')}",luserStudy.get(i).getStudy_u_p_id());
+            item.setCommand(command);
             item.setIcon("ui-icon-document");
             firstSubmenu.addElement(item);
         }

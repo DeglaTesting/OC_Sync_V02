@@ -18,7 +18,6 @@ import javax.xml.soap.SOAPEnvelope;
 import javax.xml.soap.SOAPHeader;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.soap.SOAPPart;
-import org.rdcit.ocSync.controller.CollectingStudyEvents;
 import org.rdcit.ocSync.controller.TargetStudyMetaData;
 import org.rdcit.ocSync.model.User;
 import org.w3c.dom.Node;
@@ -35,11 +34,10 @@ public class StudyMetaData_ws {
 
     }
 
-    private SOAPMessage createSOAPRequest() throws Exception {
+    private SOAPMessage createSOAPRequest(String study_u_p_id) throws Exception {
         User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
         String userPassword = user.getPassword();
         String userName = user.getUser_name();
-        String study_u_p_id = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("Study_upID");
         MessageFactory messageFactory = MessageFactory.newInstance();
         SOAPMessage soapMessage = messageFactory.createMessage();
         SOAPPart soapPart = soapMessage.getSOAPPart();
@@ -75,17 +73,16 @@ public class StudyMetaData_ws {
         return soapMessage;
     }
 
-    public void getStudyMetaData() {
+    public void getStudyMetaData(String study_u_p_id) {
         try {
             SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
             SOAPConnection soapConnection = soapConnectionFactory.createConnection();
             String url = "https://openclinica-testing.medschl.cam.ac.uk/OCplay-ws/ws/study/v1/studyWsdl.wsdl";
-            SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(), url);
+            SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(study_u_p_id), url);
             NodeList nlODM = soapResponse.getSOAPBody().getElementsByTagName("odm");
             Node nODM = nlODM.item(0);
             NodeList nlMetaData = nODM.getChildNodes();
             StringToDocument stringToDocument = new StringToDocument(nlMetaData.item(0).getNodeValue());
-            System.out.println("@@@@@@@@@@@@@ " + stringToDocument.document.getElementsByTagName("StudyEventDef"));
             TargetStudyMetaData targetStudyMetaData = new TargetStudyMetaData();
             targetStudyMetaData.getTargetStudyMetaData(stringToDocument.document);
         } catch (Exception ex) {
