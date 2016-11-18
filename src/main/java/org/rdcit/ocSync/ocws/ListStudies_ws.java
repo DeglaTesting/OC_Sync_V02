@@ -83,7 +83,7 @@ public class ListStudies_ws {
                     Node nIdentifier = nlStudy.item(j);
                     switch (nIdentifier.getNodeName()) {
                         case "identifier":
-                            study.setStudy_id(nIdentifier.getTextContent());
+                            study.setStudy_u_p_id(nIdentifier.getTextContent());
                             break;
                         case "oid":
                             study.setStudy_oid(nIdentifier.getTextContent());

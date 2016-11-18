@@ -17,6 +17,8 @@ import javax.xml.soap.SOAPHeader;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.soap.SOAPPart;
 import org.rdcit.ocSync.controller.CollectingStudyEvents;
+import org.rdcit.ocSync.model.Study;
+import org.rdcit.ocSync.model.User;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -26,14 +28,16 @@ import org.w3c.dom.NodeList;
  */
 public class StudyMetaData_ws {
 
-    String study_oid;
     String userName;
     String userPassword;
+    User user;
+    Study study;
 
-    public StudyMetaData_ws(String study_oid, String userName, String userPassword) {
-        this.study_oid = study_oid;
-        this.userName = userName;
-        this.userPassword = userPassword;
+    public StudyMetaData_ws(User user, Study study) {
+        this.user = user;
+        this.study = study;
+        this.userName = this.user.getUser_name();
+        this.userPassword = this.user.getPassword();
     }
 
     private SOAPMessage createSOAPRequest() throws Exception {
@@ -65,7 +69,7 @@ public class StudyMetaData_ws {
         SOAPElement getMetadataRequest = body.addChildElement("getMetadataRequest", "v1");
         SOAPElement studyMetadata = getMetadataRequest.addChildElement("studyMetadata", "v1");
         SOAPElement identifier = studyMetadata.addChildElement("identifier", "bean");
-        identifier.addTextNode(this.study_oid);
+        identifier.addTextNode(this.study.getStudy_u_p_id());
         MimeHeaders headers = soapMessage.getMimeHeaders();
         headers.addHeader("SOAPAction", serverURI + "create");
         soapMessage.saveChanges();
@@ -81,18 +85,18 @@ public class StudyMetaData_ws {
             NodeList nlODM = soapResponse.getSOAPBody().getElementsByTagName("odm");
             Node nODM = nlODM.item(0);
             NodeList nlMetaData = nODM.getChildNodes();
-            StringToDocument stringToXml= new StringToDocument(nlMetaData.item(0).getNodeValue());
-            CollectingStudyEvents collectingStudyEvents = new CollectingStudyEvents();
+            StringToDocument stringToXml = new StringToDocument(nlMetaData.item(0).getNodeValue());
+            CollectingStudyEvents collectingStudyEvents = new CollectingStudyEvents(this.study);
             collectingStudyEvents.collectingStudyEvents(stringToXml.document);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public static void main(String[] args) {
+  /*  public static void main(String[] args) {
         StudyMetaData_ws http = new StudyMetaData_ws("WS-study", "sa841", "32f4a48056b62a73fad8482a3fa502fc35b96701");
         System.out.println("Testing 1 - Send Http GET request");
         http.getStudyMetaData();
-    }
+    }*/
 
 }

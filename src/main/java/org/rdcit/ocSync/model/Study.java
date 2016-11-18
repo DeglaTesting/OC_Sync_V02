@@ -5,6 +5,9 @@
  */
 package org.rdcit.ocSync.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author sa841
@@ -13,17 +16,17 @@ public class Study {
 
     String study_name;
     String study_oid;
-     String study_id;
-    String owner_id;
-    String owner_name;
+    String study_u_p_id;
+    List<StudyEvent> lStudyEvent;
 
     public Study() {
     }
-    
-    public Study(String study_id, String study_name, String study_oid) {
-        this.study_id = study_id;
+
+    public Study(String study_u_p_id, String study_name, String study_oid) {
+        this.study_u_p_id = study_u_p_id;
         this.study_name = study_name;
         this.study_oid = study_oid;
+        lStudyEvent = new ArrayList();
     }
 
     public String getStudy_name() {
@@ -32,13 +35,6 @@ public class Study {
 
     public void setStudy_name(String study_name) {
         this.study_name = study_name;
-    }
-    public String getOwner_id() {
-        return owner_id;
-    }
-
-    public void setOwner_id(String owner_id) {
-        this.owner_id = owner_id;
     }
 
     public String getStudy_oid() {
@@ -49,16 +45,28 @@ public class Study {
         this.study_oid = study_oid;
     }
 
-    public String getStudy_id() {
-        return study_id;
+    public String getStudy_u_p_id() {
+        return study_u_p_id;
     }
 
-    public void setStudy_id(String study_id) {
-        this.study_id = study_id;
+    public void setStudy_u_p_id(String study_u_p_id) {
+        this.study_u_p_id = study_u_p_id;
     }
+
+    public List<StudyEvent> getlStudyEvent() {
+        return lStudyEvent;
+    }
+
+    public void setlStudyEvent(List<StudyEvent> lStudyEvent) {
+        this.lStudyEvent = lStudyEvent;
+    }
+    public void addStudyEvent(StudyEvent StudyEvent) {
+        this.lStudyEvent.add(StudyEvent);
+    }
+    
 
     @Override
     public String toString() {
-        return "Study {" + "study_name=" + study_name + ", study_oid=" + study_oid + ", study_id=" + study_id + '}';
+        return "Study {" + "study_name=" + study_name + ", study_oid=" + study_oid + ", study_id=" + study_u_p_id + '}';
     }
 }

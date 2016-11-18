@@ -57,8 +57,6 @@ public class UserCredentials {
     public void redirectLoginPage() {
         ListStudies_ws listStudies_ws = new ListStudies_ws(this.user);
         listStudies_ws.getUserStudyList();
-       // CollectUserStudies collectUserStudies = new CollectUserStudies(this.user);
-        //collectUserStudies.collectingStudies();
         FacesContext facesContext = FacesContext.getCurrentInstance();
         NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
         if (this.user.getlStudy().isEmpty()) {

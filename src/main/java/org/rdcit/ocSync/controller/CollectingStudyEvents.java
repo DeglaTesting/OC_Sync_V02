@@ -8,6 +8,7 @@ package org.rdcit.ocSync.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.rdcit.ocSync.model.Study;
 import org.rdcit.ocSync.model.StudyEvent;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -19,7 +20,11 @@ import org.w3c.dom.NodeList;
  * @author sa841
  */
 public class CollectingStudyEvents {
-    
+    Study study;
+
+    public CollectingStudyEvents(Study study) {
+        this.study = study;
+    }
     public  List<StudyEvent> collectingStudyEvents(Document doc) {
         List<StudyEvent> lStudyEvent = new ArrayList();
             NodeList nlStudyEvent = doc.getElementsByTagName("StudyEventDef");
@@ -29,7 +34,8 @@ public class CollectingStudyEvents {
                     Element eStydyEvent = (Element) nStudyEvent;
                     StudyEvent studyEvent = new StudyEvent(eStydyEvent.getAttribute("OID"));
                     studyEvent.setEventName(eStydyEvent.getAttribute("Name"));
-                    lStudyEvent.add(studyEvent);
+                    //lStudyEvent.add(studyEvent);
+                    this.study.addStudyEvent(studyEvent);
                 }
             }
             System.out.println("WOWOWOOWOW " + lStudyEvent.size());

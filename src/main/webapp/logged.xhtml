@@ -14,32 +14,31 @@
         </h:head>
 
         <h:body>
+            <h:form>
+                <p:layout fullPage="true">
+                    <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                        <p:menubar>
+                            <p:submenu label="Welcome #{Logged.userName}"/>
+                            <f:facet name="options">
+                                <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" action="#{Logged.logout()}"/>
+                            </f:facet>
+                        </p:menubar>
+                    </p:layoutUnit>
 
-            <p:layout fullPage="true">
+                    <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                        Footer
+                    </p:layoutUnit>
 
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                   <p:menubar>
-                       <p:submenu label="Welcome #{Logged.userName}"/>
-                        <f:facet name="options">
-                            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" action="#{Logged.logout()}"/>
-                        </f:facet>
-                    </p:menubar>
-                </p:layoutUnit>
+                    <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                        <p:menu model="#{UserStudiesList.model}" />
+                    </p:layoutUnit>
 
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
-                </p:layoutUnit>
+                    <p:layoutUnit position="center">
+                        <ui:include src="#{Logged.loggedPage}"/>
+                    </p:layoutUnit>
 
-                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
-                    <ui:include src="userStudyList.xhtml"/>
-                </p:layoutUnit>
-
-                <p:layoutUnit position="center">
-                     <ui:include src="#{Logged.loggedPage}"/>
-                </p:layoutUnit>
-
-            </p:layout>
-
+                </p:layout>
+            </h:form>
         </h:body>
     </f:view>
 </html>

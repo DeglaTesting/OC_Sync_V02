@@ -22,11 +22,11 @@ import org.rdcit.ocSync.model.Study;
 @ManagedBean(name = "UserStudiesList")
 public class UserStudiesList {
 
-    private MenuModel lUserStudy;
+    private MenuModel model;
 
     @PostConstruct
     public void init() {
-        lUserStudy = new DefaultMenuModel();
+        model = new DefaultMenuModel();
         FacesContext facesContext = FacesContext.getCurrentInstance();
         List<Study> luserStudy = (List<Study>) facesContext.getExternalContext().getSessionMap().get("studyUserList");
         DefaultSubMenu firstSubmenu = new DefaultSubMenu("Your Studies");
@@ -36,16 +36,16 @@ public class UserStudiesList {
             item.setCommand("#{TargetStudyMetaData.getStudyMetaData()}");
             item.setIcon("ui-icon-document");
             firstSubmenu.addElement(item);
-            lUserStudy.addElement(firstSubmenu);
         }
+         model.addElement(firstSubmenu);
     }
 
     public MenuModel getModel() {
-        return lUserStudy;
+        return model;
     }
 
     public void setModel(MenuModel model) {
-        this.lUserStudy = model;
+        this.model = model;
     }
 
 }
