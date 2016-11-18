@@ -5,8 +5,8 @@
  */
 package org.rdcit.ocSync.view;
 
+import java.io.Serializable;
 import javax.faces.application.FacesMessage;
-import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -19,7 +19,7 @@ import org.rdcit.ocSync.controller.UserCredentials;
  */
 @ManagedBean(name = "UserLogin")
 @SessionScoped
-public class UserLogin {
+public class UserLogin implements Serializable{
 
     private String username;
     private String password;

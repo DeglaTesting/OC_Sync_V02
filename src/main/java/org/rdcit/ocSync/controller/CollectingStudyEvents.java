@@ -20,10 +20,9 @@ import org.w3c.dom.NodeList;
  * @author sa841
  */
 public class CollectingStudyEvents {
-    Study study;
+    
 
-    public CollectingStudyEvents(Study study) {
-        this.study = study;
+    public CollectingStudyEvents() {
     }
     public  List<StudyEvent> collectingStudyEvents(Document doc) {
         List<StudyEvent> lStudyEvent = new ArrayList();
@@ -34,8 +33,7 @@ public class CollectingStudyEvents {
                     Element eStydyEvent = (Element) nStudyEvent;
                     StudyEvent studyEvent = new StudyEvent(eStydyEvent.getAttribute("OID"));
                     studyEvent.setEventName(eStydyEvent.getAttribute("Name"));
-                    //lStudyEvent.add(studyEvent);
-                    this.study.addStudyEvent(studyEvent);
+                    lStudyEvent.add(studyEvent);
                 }
             }
             System.out.println("WOWOWOOWOW " + lStudyEvent.size());

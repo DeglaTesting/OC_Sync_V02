@@ -86,7 +86,7 @@ public class StudyMetaData_ws {
             Node nODM = nlODM.item(0);
             NodeList nlMetaData = nODM.getChildNodes();
             StringToDocument stringToXml = new StringToDocument(nlMetaData.item(0).getNodeValue());
-            CollectingStudyEvents collectingStudyEvents = new CollectingStudyEvents(this.study);
+            CollectingStudyEvents collectingStudyEvents = new CollectingStudyEvents();
             collectingStudyEvents.collectingStudyEvents(stringToXml.document);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

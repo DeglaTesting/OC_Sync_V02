@@ -64,7 +64,7 @@ public class UserCredentials {
         } else {
             facesContext.getExternalContext().getSessionMap().put("logged", "userStudies.xhtml");
         }
-        nh.handleNavigation(facesContext, null, "logged.xhtml");
+        nh.handleNavigation(facesContext, null, "loggedIn.xhtml");
     }
 
 }

@@ -33,6 +33,7 @@ public class UserStudiesList {
 
         for (int i = 0; i < luserStudy.size(); i++) {
             DefaultMenuItem item = new DefaultMenuItem(luserStudy.get(i).getStudy_name());
+           // FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("",item);
             item.setCommand("#{TargetStudyMetaData.getStudyMetaData()}");
             item.setIcon("ui-icon-document");
             firstSubmenu.addElement(item);
