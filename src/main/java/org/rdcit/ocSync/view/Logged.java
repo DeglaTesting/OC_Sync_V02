@@ -7,6 +7,7 @@ package org.rdcit.ocSync.view;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import org.rdcit.ocSync.model.User;
 
 /**
  *
@@ -20,7 +21,7 @@ public class Logged {
 
     public String getUserName() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        userName = (String) facesContext.getExternalContext().getSessionMap().get("user");
+        userName = ((User)facesContext.getExternalContext().getSessionMap().get("user")).getUser_name();
         return userName;
     }
 

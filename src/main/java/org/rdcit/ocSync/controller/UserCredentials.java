@@ -40,12 +40,8 @@ public class UserCredentials {
                 this.verifiy = false;
             } else {
                 this.verifiy = true;
-                do {
-                    System.out.println("USerNAme " + rs.getString("user_id"));
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user_id", rs.getString("user_id"));
-                    this.user = new User(this.userName, rs.getString("user_id"), this.password);
-                } while (rs.next());
-
+                user = new User( this.userName, this.password);
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
             }
 
         } catch (SQLException ex) {

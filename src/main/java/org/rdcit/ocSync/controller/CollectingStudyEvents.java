@@ -33,6 +33,7 @@ public class CollectingStudyEvents {
                     Element eStydyEvent = (Element) nStudyEvent;
                     StudyEvent studyEvent = new StudyEvent(eStydyEvent.getAttribute("OID"));
                     studyEvent.setEventName(eStydyEvent.getAttribute("Name"));
+                    studyEvent.toString();
                     lStudyEvent.add(studyEvent);
                 }
             }

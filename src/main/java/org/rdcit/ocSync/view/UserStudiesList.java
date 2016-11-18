@@ -23,6 +23,7 @@ import org.rdcit.ocSync.model.Study;
 public class UserStudiesList {
 
     private MenuModel model;
+    String selectedStudy;
 
     @PostConstruct
     public void init() {
@@ -33,12 +34,13 @@ public class UserStudiesList {
 
         for (int i = 0; i < luserStudy.size(); i++) {
             DefaultMenuItem item = new DefaultMenuItem(luserStudy.get(i).getStudy_name());
-           // FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("",item);
-            item.setCommand("#{TargetStudyMetaData.getStudyMetaData()}");
+            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("Study_upID", luserStudy.get(i).getStudy_u_p_id());
+            item.setCommand("#{StudyMetaData_ws.getStudyMetaData()}");
+
             item.setIcon("ui-icon-document");
             firstSubmenu.addElement(item);
         }
-         model.addElement(firstSubmenu);
+        model.addElement(firstSubmenu);
     }
 
     public MenuModel getModel() {
@@ -49,4 +51,13 @@ public class UserStudiesList {
         this.model = model;
     }
 
+    public String getSelectedStudy() {
+        System.out.println("Selecting ITEM " + selectedStudy);
+        return selectedStudy;
+    }
+
+    public void setSelectedStudy(String selectedStudy) {
+        this.selectedStudy = selectedStudy;
+        System.out.println("SETITITNG ITEM " + this.selectedStudy);
+    }
 }

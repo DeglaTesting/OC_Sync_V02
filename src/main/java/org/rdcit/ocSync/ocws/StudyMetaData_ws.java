@@ -5,6 +5,8 @@
  */
 package org.rdcit.ocSync.ocws;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.xml.namespace.QName;
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.MimeHeaders;
@@ -17,7 +19,6 @@ import javax.xml.soap.SOAPHeader;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.soap.SOAPPart;
 import org.rdcit.ocSync.controller.CollectingStudyEvents;
-import org.rdcit.ocSync.model.Study;
 import org.rdcit.ocSync.model.User;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -26,21 +27,18 @@ import org.w3c.dom.NodeList;
  *
  * @author sa841
  */
+@ManagedBean(name = "StudyMetaData_ws")
 public class StudyMetaData_ws {
 
-    String userName;
-    String userPassword;
-    User user;
-    Study study;
+    public StudyMetaData_ws() {
 
-    public StudyMetaData_ws(User user, Study study) {
-        this.user = user;
-        this.study = study;
-        this.userName = this.user.getUser_name();
-        this.userPassword = this.user.getPassword();
     }
 
     private SOAPMessage createSOAPRequest() throws Exception {
+        User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        String userPassword = user.getPassword();
+        String userName = user.getUser_name();
+        String study_u_p_id = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("Study_upID");
         MessageFactory messageFactory = MessageFactory.newInstance();
         SOAPMessage soapMessage = messageFactory.createMessage();
         SOAPPart soapPart = soapMessage.getSOAPPart();
@@ -62,14 +60,14 @@ public class StudyMetaData_ws {
         usernameToken.addAttribute(new QName("xmlns:wsu"), "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd");
         usernameToken.addAttribute(new QName("wsu:Id"), "UsernameToken-27777511");
         SOAPElement username = usernameToken.addChildElement("Username", "wsse");
-        username.addTextNode(this.userName);
+        username.addTextNode(userName);
         SOAPElement password = usernameToken.addChildElement("Password", "wsse");
         password.setAttribute("Type", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText");
-        password.addTextNode(this.userPassword);
+        password.addTextNode(userPassword);
         SOAPElement getMetadataRequest = body.addChildElement("getMetadataRequest", "v1");
         SOAPElement studyMetadata = getMetadataRequest.addChildElement("studyMetadata", "v1");
         SOAPElement identifier = studyMetadata.addChildElement("identifier", "bean");
-        identifier.addTextNode(this.study.getStudy_u_p_id());
+        identifier.addTextNode(study_u_p_id);
         MimeHeaders headers = soapMessage.getMimeHeaders();
         headers.addHeader("SOAPAction", serverURI + "create");
         soapMessage.saveChanges();
@@ -85,18 +83,11 @@ public class StudyMetaData_ws {
             NodeList nlODM = soapResponse.getSOAPBody().getElementsByTagName("odm");
             Node nODM = nlODM.item(0);
             NodeList nlMetaData = nODM.getChildNodes();
-            StringToDocument stringToXml = new StringToDocument(nlMetaData.item(0).getNodeValue());
+            StringToDocument stringToDocument = new StringToDocument(nlMetaData.item(0).getNodeValue());
             CollectingStudyEvents collectingStudyEvents = new CollectingStudyEvents();
-            collectingStudyEvents.collectingStudyEvents(stringToXml.document);
+            collectingStudyEvents.collectingStudyEvents(stringToDocument.document);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
-
-  /*  public static void main(String[] args) {
-        StudyMetaData_ws http = new StudyMetaData_ws("WS-study", "sa841", "32f4a48056b62a73fad8482a3fa502fc35b96701");
-        System.out.println("Testing 1 - Send Http GET request");
-        http.getStudyMetaData();
-    }*/
-
 }
