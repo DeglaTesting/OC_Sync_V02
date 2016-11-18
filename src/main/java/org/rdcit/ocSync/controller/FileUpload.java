@@ -32,6 +32,8 @@ public class FileUpload {
             UploadedFile.sourceUploadedFile = new File(sourcefilePath);
             FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
+            StudyMetaData studyMetaData = new StudyMetaData(); 
+            studyMetaData.getStudyMetaDataFromFile(UploadedFile.sourceUploadedFile);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
