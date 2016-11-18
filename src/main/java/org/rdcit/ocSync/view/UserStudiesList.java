@@ -9,12 +9,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
-import org.primefaces.event.MenuActionEvent;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
-import org.primefaces.model.menu.MenuItem;
 import org.primefaces.model.menu.MenuModel;
 import org.rdcit.ocSync.model.Study;
 
@@ -26,7 +23,6 @@ import org.rdcit.ocSync.model.Study;
 public class UserStudiesList {
 
     private MenuModel model;
-    String selectedStudy;
 
     @PostConstruct
     public void init() {
@@ -52,15 +48,5 @@ public class UserStudiesList {
 
     public void setModel(MenuModel model) {
         this.model = model;
-    }
-
-    public String getSelectedStudy() {
-        System.out.println("Selecting ITEM " + selectedStudy);
-        return selectedStudy;
-    }
-
-    public void setSelectedStudy(String selectedStudy) {
-        this.selectedStudy = selectedStudy;
-        System.out.println("SETITITNG ITEM " + this.selectedStudy);
     }
 }
