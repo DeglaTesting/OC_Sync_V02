@@ -10,10 +10,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
+import org.rdcit.ocSync.model.StudyEvent;
 
 /**
  *
@@ -24,16 +27,18 @@ public class FileUpload {
 
     public String sourcefilePath;
     private final String destination = "C:\\Users\\sa841\\Documents\\";
+    List<StudyEvent> lSourceStudyEvent;
 
     public void uploadSourceFile(FileUploadEvent event) {
         try {
+            lSourceStudyEvent = new ArrayList();
             copyFile(event.getFile().getFileName(), event.getFile().getInputstream());
             sourcefilePath = destination + event.getFile().getFileName();
             UploadedFile.sourceUploadedFile = new File(sourcefilePath);
             FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
             StudyMetaData studyMetaData = new StudyMetaData(); 
-            studyMetaData.getStudyMetaDataFromFile(UploadedFile.sourceUploadedFile);
+            lSourceStudyEvent = studyMetaData.getStudyMetaDataFromFile(UploadedFile.sourceUploadedFile);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -54,7 +59,14 @@ public class FileUpload {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
 
+    public List<StudyEvent> getlSourceStudyEvent() {
+        return lSourceStudyEvent;
+    }
+
+    public void setlSourceStudyEvent(List<StudyEvent> lSourceStudyEvent) {
+        this.lSourceStudyEvent = lSourceStudyEvent;
     }
 
 }

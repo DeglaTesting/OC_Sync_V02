@@ -21,7 +21,7 @@ import org.xml.sax.SAXException;
  */
 public class StudyMetaData {
 
-    public void getStudyMetaData(Document document) {
+    public  List<StudyEvent> getStudyMetaData(Document document) {
         CollectingStudyEvents collectingStudyEvents = new CollectingStudyEvents();
         List<StudyEvent> lStudyEvent = collectingStudyEvents.collectingStudyEvents(document);
         for (int i = 0; i < lStudyEvent.size(); i++) {
@@ -37,18 +37,21 @@ public class StudyMetaData {
             }
         }
         System.out.println("the Target study has + " + lStudyEvent.get(0).getlStudyEventForm().get(0).getlItemGroup().get(0).getlItem().size());
+        return lStudyEvent;
     }
     
-     public void getStudyMetaDataFromFile(File file) {
+     public List<StudyEvent> getStudyMetaDataFromFile(File file) {
+         List<StudyEvent> lStudyEvent = null;
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(file);
             doc.getDocumentElement().normalize();
-            getStudyMetaData(doc);
+            lStudyEvent = getStudyMetaData(doc);
         } catch (ParserConfigurationException | SAXException | IOException ex) {
             System.out.println(ex.getMessage());
         }
+        return lStudyEvent;
     }
 
 }

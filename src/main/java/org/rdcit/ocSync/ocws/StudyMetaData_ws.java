@@ -5,6 +5,8 @@
  */
 package org.rdcit.ocSync.ocws;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.xml.namespace.QName;
@@ -19,6 +21,7 @@ import javax.xml.soap.SOAPHeader;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.soap.SOAPPart;
 import org.rdcit.ocSync.controller.StudyMetaData;
+import org.rdcit.ocSync.model.StudyEvent;
 import org.rdcit.ocSync.model.User;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -29,9 +32,11 @@ import org.w3c.dom.NodeList;
  */
 @ManagedBean(name = "StudyMetaData_ws")
 public class StudyMetaData_ws {
+    
+    List<StudyEvent> lTargetStudyEvent;
 
     public StudyMetaData_ws() {
-
+        lTargetStudyEvent = new ArrayList();
     }
 
     private SOAPMessage createSOAPRequest(String study_u_p_id) throws Exception {
@@ -84,9 +89,20 @@ public class StudyMetaData_ws {
             NodeList nlMetaData = nODM.getChildNodes();
             StringToDocument stringToDocument = new StringToDocument(nlMetaData.item(0).getNodeValue());
             StudyMetaData targetStudyMetaData = new StudyMetaData();
-            targetStudyMetaData.getStudyMetaData(stringToDocument.document);
+             lTargetStudyEvent = targetStudyMetaData.getStudyMetaData(stringToDocument.document);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
+
+    public List<StudyEvent> getlTargetStudyEvent() {
+        return lTargetStudyEvent;
+    }
+
+    public void setlTargetStudyEvent(List<StudyEvent> lTargetStudyEvent) {
+        this.lTargetStudyEvent = lTargetStudyEvent;
+    }
+    
+    
+    
 }
