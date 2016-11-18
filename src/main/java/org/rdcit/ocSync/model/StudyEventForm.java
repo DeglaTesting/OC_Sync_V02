@@ -15,17 +15,8 @@ import java.util.List;
 public class StudyEventForm {
 
     String formOID;
-    String formVersion;
-    String formID;
     String formName;
     List<ItemGroup> lItemGroup;
-
-    public StudyEventForm(String formOID, String formID, String formName) {
-        this.formOID = formOID;
-        this.formID = formID;
-        this.formName = formName;
-         lItemGroup = new ArrayList();
-    }
 
     public StudyEventForm(String formOID) {
         this.formOID = formOID;
@@ -48,23 +39,6 @@ public class StudyEventForm {
         this.formName = formName;
     }
 
-    public String getFormVersion() {
-        return formVersion;
-    }
-
-    public void setFormVersion(String formVersion) {
-        this.formVersion = formVersion;
-    }
-
-    public String getFormID() {
-        return formID;
-    }
-
-    public void setFormID(String formID) {
-        this.formID = formID;
-    }
-
-
     public List<ItemGroup> getlItemGroup() {
         return lItemGroup;
     }
@@ -75,6 +49,11 @@ public class StudyEventForm {
     
     public void addItemGroup(ItemGroup itemGroup){
         lItemGroup.add(itemGroup);
+    }
+
+    @Override
+    public String toString() {
+        return "StudyEventForm{" + "formOID=" + formOID + ", formName=" + formName + '}';
     }
  
 }

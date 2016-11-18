@@ -11,14 +11,7 @@ package org.rdcit.ocSync.model;
  */
 public class Item {
     String itemOID;
-    String itemID;
     String itemName;
-
-    public Item(String itemOID, String itemID, String itemName) {
-        this.itemOID = itemOID;
-        this.itemID = itemID;
-        this.itemName = itemName;
-    }
 
     public Item(String itemOID) {
         this.itemOID = itemOID;
@@ -41,12 +34,9 @@ public class Item {
         this.itemName = itemName;
     }
 
-    public String getItemID() {
-        return itemID;
-    }
-
-    public void setItemID(String itemID) {
-        this.itemID = itemID;
+    @Override
+    public String toString() {
+        return "Item{" + "itemOID=" + itemOID + ", itemName=" + itemName + '}';
     }
 
 }

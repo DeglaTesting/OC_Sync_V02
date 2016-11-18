@@ -5,10 +5,8 @@
  */
 package org.rdcit.ocSync.controller;
 
-
 import java.util.ArrayList;
 import java.util.List;
-import org.rdcit.ocSync.model.Study;
 import org.rdcit.ocSync.model.StudyEvent;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -20,26 +18,23 @@ import org.w3c.dom.NodeList;
  * @author sa841
  */
 public class CollectingStudyEvents {
-    
 
-    public CollectingStudyEvents() {
-    }
-    public  List<StudyEvent> collectingStudyEvents(Document doc) {
+  
+    public List<StudyEvent> collectingStudyEvents( Document document) {
         List<StudyEvent> lStudyEvent = new ArrayList();
-            NodeList nlStudyEvent = doc.getElementsByTagName("StudyEventDef");
-            for (int i = 0; i < nlStudyEvent.getLength(); i++) {
-                Node nStudyEvent = nlStudyEvent.item(i);
-                if ((nStudyEvent.getNodeType() == Node.ELEMENT_NODE) ) {
-                    Element eStydyEvent = (Element) nStudyEvent;
-                    StudyEvent studyEvent = new StudyEvent(eStydyEvent.getAttribute("OID"));
-                    studyEvent.setEventName(eStydyEvent.getAttribute("Name"));
-                    studyEvent.toString();
-                    lStudyEvent.add(studyEvent);
-                }
+        NodeList nlStudyEvent = document.getElementsByTagName("StudyEventDef");
+        for (int i = 0; i < nlStudyEvent.getLength(); i++) {
+            Node nStudyEvent = nlStudyEvent.item(i);
+            if ((nStudyEvent.getNodeType() == Node.ELEMENT_NODE)) {
+                Element eStydyEvent = (Element) nStudyEvent;
+                StudyEvent studyEvent = new StudyEvent(eStydyEvent.getAttribute("OID"));
+                studyEvent.setEventName(eStydyEvent.getAttribute("Name"));
+                System.out.println(studyEvent.toString());
+                lStudyEvent.add(studyEvent);
             }
-            System.out.println("WOWOWOOWOW " + lStudyEvent.size());
+        }
+        System.out.println("WOWOWOOWOW " + lStudyEvent.size());
         return lStudyEvent;
     }
-    
-    
+
 }

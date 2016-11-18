@@ -19,6 +19,7 @@ import javax.xml.soap.SOAPHeader;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.soap.SOAPPart;
 import org.rdcit.ocSync.controller.CollectingStudyEvents;
+import org.rdcit.ocSync.controller.TargetStudyMetaData;
 import org.rdcit.ocSync.model.User;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -84,8 +85,9 @@ public class StudyMetaData_ws {
             Node nODM = nlODM.item(0);
             NodeList nlMetaData = nODM.getChildNodes();
             StringToDocument stringToDocument = new StringToDocument(nlMetaData.item(0).getNodeValue());
-            CollectingStudyEvents collectingStudyEvents = new CollectingStudyEvents();
-            collectingStudyEvents.collectingStudyEvents(stringToDocument.document);
+            System.out.println("@@@@@@@@@@@@@ " + stringToDocument.document.getElementsByTagName("StudyEventDef"));
+            TargetStudyMetaData targetStudyMetaData = new TargetStudyMetaData();
+            targetStudyMetaData.getTargetStudyMetaData(stringToDocument.document);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

@@ -36,7 +36,6 @@ public class UserStudiesList {
             DefaultMenuItem item = new DefaultMenuItem(luserStudy.get(i).getStudy_name());
             FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("Study_upID", luserStudy.get(i).getStudy_u_p_id());
             item.setCommand("#{StudyMetaData_ws.getStudyMetaData()}");
-
             item.setIcon("ui-icon-document");
             firstSubmenu.addElement(item);
         }

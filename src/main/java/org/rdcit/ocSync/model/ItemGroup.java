@@ -16,16 +16,8 @@ import java.util.List;
 public class ItemGroup {
 
     String itemGroupOID;
-    String itemGroupID;
     String itemGroupName;
     List<Item> lItem;
-
-    public ItemGroup(String itemGroupOID, String itemGroupID, String itemGroupName) {
-        this.itemGroupOID = itemGroupOID;
-        this.itemGroupID = itemGroupID;
-        this.itemGroupName = itemGroupName;
-         lItem =  new ArrayList();
-    }
 
     public ItemGroup(String itemGroupOID) {
         this.itemGroupOID = itemGroupOID;
@@ -48,14 +40,6 @@ public class ItemGroup {
         this.itemGroupName = itemGroupName;
     }
 
-    public String getItemGroupID() {
-        return itemGroupID;
-    }
-
-    public void setItemGroupID(String itemGroupID) {
-        this.itemGroupID = itemGroupID;
-    }
-
     public List<Item> getlItem() {
         return lItem;
     }
@@ -66,6 +50,11 @@ public class ItemGroup {
     
     public void addItem(Item item){
         this.lItem.add(item);
+    }
+
+    @Override
+    public String toString() {
+        return "ItemGroup{" + "itemGroupOID=" + itemGroupOID + ", itemGroupName=" + itemGroupName + '}';
     }
 
 }

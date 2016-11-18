@@ -16,17 +16,9 @@ import java.util.List;
 public class StudyEvent {
 
     String eventOID;
-    String eventDefID;
     String eventName;
     List<StudyEventForm> lStudyEventForm;
 
-    public StudyEvent(String eventOID, String eventDefID, String eventName) {
-        this.eventOID = eventOID;
-        this.eventDefID = eventDefID;
-        this.eventName = eventName;
-        lStudyEventForm = new ArrayList();
-    }
-    
     public StudyEvent(String eventOID) {
         this.eventOID = eventOID;
         lStudyEventForm = new ArrayList();
@@ -48,14 +40,6 @@ public class StudyEvent {
         this.eventName = eventName;
     }
 
-    public String getEventDefID() {
-        return eventDefID;
-    }
-
-    public void setEventDefID(String eventDefID) {
-        this.eventDefID = eventDefID;
-    }
-
     public List<StudyEventForm> getlStudyEventForm() {
         return lStudyEventForm;
     }
@@ -67,5 +51,12 @@ public class StudyEvent {
    public void addStudyEventForm (StudyEventForm studyEventForm){
        this.lStudyEventForm.add(studyEventForm);
    } 
+
+    @Override
+    public String toString() {
+        return "StudyEvent{" + "eventOID=" + eventOID + " eventName=" + eventName + '}';
+    }
+   
+   
    
 }
