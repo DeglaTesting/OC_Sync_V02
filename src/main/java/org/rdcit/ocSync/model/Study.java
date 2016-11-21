@@ -5,6 +5,7 @@
  */
 package org.rdcit.ocSync.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author sa841
  */
-public class Study {
+public class Study implements Serializable{
 
     String study_name;
     String study_oid;

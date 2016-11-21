@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.faces.application.NavigationHandler;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.rdcit.ocSync.model.User;
@@ -18,6 +20,8 @@ import org.rdcit.ocSync.ocws.ListStudies_ws;
  *
  * @author sa841
  */
+@ManagedBean(name = "UserCredentials")
+@SessionScoped
 public class UserCredentials {
 
     String userName;
@@ -40,7 +44,7 @@ public class UserCredentials {
                 this.verifiy = false;
             } else {
                 this.verifiy = true;
-                user = new User( this.userName, this.password);
+                user = new User(this.userName, this.password);
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
             }
 
@@ -54,13 +58,13 @@ public class UserCredentials {
         ListStudies_ws listStudies_ws = new ListStudies_ws(this.user);
         listStudies_ws.getUserStudyList();
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
+        //NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
         if (this.user.getlStudy().isEmpty()) {
             facesContext.getExternalContext().getSessionMap().put("logged", "noStudyFound.xhtml");
         } else {
             facesContext.getExternalContext().getSessionMap().put("logged", "userStudies.xhtml");
         }
-        nh.handleNavigation(facesContext, null, "loggedIn.xhtml");
+       // nh.handleNavigation(facesContext, null, "loggedIn.xhtml");
     }
 
 }

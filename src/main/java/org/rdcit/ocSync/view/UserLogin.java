@@ -5,9 +5,12 @@
  */
 package org.rdcit.ocSync.view;
 
+import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -19,8 +22,8 @@ import org.rdcit.ocSync.model.User;
  * @author sa841
  */
 @ManagedBean(name = "UserLogin")
-@ViewScoped
-public class UserLogin implements Serializable{
+@SessionScoped
+public class UserLogin implements Serializable {
 
     private String username;
     private String password;
@@ -41,17 +44,17 @@ public class UserLogin implements Serializable{
         this.password = password;
     }
 
-    public void login(ActionEvent event) {
+    public void login(ActionEvent event) throws IOException {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         FacesMessage message = null;
-        UserCredentials userCredentials = new UserCredentials(username, password); 
+        UserCredentials userCredentials = new UserCredentials(username, password);
         boolean loggedIn = userCredentials.verifyCredentials();
         if (loggedIn == true) {
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username);
             userCredentials.redirectLoginPage();
+            facesContext.getExternalContext().redirect("loggedIn.xhtml");
         } else {
             message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Invalid credentials");
-        }
-        facesContext.addMessage(null, message);
+            facesContext.addMessage(null, message);
+        } 
     }
 }

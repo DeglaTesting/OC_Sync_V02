@@ -23,7 +23,7 @@
             </h:panelGrid>
             <h:panelGrid columns="2" style="margin-top:20px">
                 <h:outputText style="margin-right:255px"/>  
-                <p:commandButton value="Login" update="growl"  type="submit" actionListener="#{UserLogin.login}"/>
+                <p:commandButton value="Login" update="growl" type="submit" actionListener="#{UserLogin.login}" ajax="false"/>
             </h:panelGrid>
         </p:panel>
     </h:form>
