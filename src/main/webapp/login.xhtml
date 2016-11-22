@@ -14,8 +14,8 @@
             </h:panelGrid>
             <h:panelGrid columns="2" style="margin-top:50px;">
                 <h:outputText value="Please choose an OC instance :"/>  
-                <p:selectOneMenu value="#{OcInstance.instance}">
-                    <f:selectItem itemLabel="Choose One" itemValue="" />
+                <p:selectOneMenu value="#{OcInstance.instance}" valueChangeListener="#{OcInstance.valueChangeMethod}" onchange="submit()" >
+                    <f:selectItem itemLabel="Choose One" itemValue=""  />
                     <f:selectItem itemLabel="OC_Play" itemValue="OC_Play" />
                     <f:selectItem itemLabel="OC_Design" itemValue="OC_Design" />
                     <f:selectItem itemLabel="OC_Live" itemValue="OC_Live" />

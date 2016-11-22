@@ -37,7 +37,8 @@ public class UserCredentials {
 
     public boolean verifyCredentials() {
         try {
-            PreparedStatement prepStmt = Connect.openConnection().prepareStatement("SELECT user_id FROM user_account WHERE user_name = '" + this.userName + "' AND passwd = '" + this.password + "';");
+            Connect connect = new Connect();
+            PreparedStatement prepStmt = connect.openConnection().prepareStatement("SELECT user_id FROM user_account WHERE user_name = '" + this.userName + "' AND passwd = '" + this.password + "';");
             ResultSet rs = prepStmt.executeQuery();
             if (!rs.next()) {
                 System.out.println("NOT FOUND");

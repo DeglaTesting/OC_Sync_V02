@@ -6,7 +6,6 @@ package org.rdcit.ocSync.controller;
  * and open the template in the editor.
  */
 import java.io.Serializable;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 

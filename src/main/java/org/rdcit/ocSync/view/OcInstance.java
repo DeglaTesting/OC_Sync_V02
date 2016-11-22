@@ -6,25 +6,42 @@
 package org.rdcit.ocSync.view;
 
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 
 /**
  *
  * @author sa841
  */
-@ManagedBean( name="OcInstance")
+@ManagedBean(name = "OcInstance")
+@SessionScoped
+
 public class OcInstance implements Serializable {
-    private static final long serialVersionUID = 1L; 
-    private String instance;
+
+    private static final long serialVersionUID = 1L;
+    String instance;
 
     public String getInstance() {
-        System.out.println("");
         return instance;
     }
 
     public void setInstance(String instance) {
         this.instance = instance;
     }
-    
-    
+
+    public void valueChangeMethod(ValueChangeEvent e) {
+        if (e.getNewValue() == null) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Please choose an OC instance!!");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else {
+            this.instance = e.getNewValue().toString();
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("ocInstance", this.instance);
+            System.out.println("********************** +this.instance" +  FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("ocInstance"));
+        }
+
+    }
+
 }

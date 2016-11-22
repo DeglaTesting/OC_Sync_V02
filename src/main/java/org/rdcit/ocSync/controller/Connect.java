@@ -14,14 +14,19 @@ import java.sql.SQLException;
  * @author sa841
  */
 public class Connect {
-    
-    static Connection connection;
-    
-  
-    public static Connection openConnection() {
+
+    Connection connection;
+    ConfFileReader confFileReader;
+
+    public Connect() {
+        confFileReader = new ConfFileReader();
+    }
+
+    public Connection openConnection() {
         try {
             Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection("jdbc:postgresql://openclinica-testing.medschl.cam.ac.uk:5432/ocplay", "postgres", "oc33ca");
+            connection = DriverManager.getConnection("jdbc:postgresql://" + this.confFileReader.getHost() + ":" + this.confFileReader.getPort() + "/" + this.confFileReader.getDb_name(), this.confFileReader.getDb_user_name(), this.confFileReader.getDb_user_pwd());
+            // System.out.println("~~~~~~~~~~~~~ jdbc:postgresql://"+connect.confFileReader.getHost()+":"+connect.confFileReader.getPort()+"/"+connect.confFileReader.getDb_name()+", "+connect.confFileReader.getDb_user_name()+", "+connect.confFileReader.getDb_user_pwd());
             if (connection != null) {
                 System.out.println("You made it, take control your database now!");
             } else {
@@ -31,13 +36,15 @@ public class Connect {
             System.out.println(ex.getMessage());
         }
         return connection;
+
     }
 
     public void closeConnection() {
         try {
-            Connect.connection.close();
+            this.connection.close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-    } 
+    }
+
 }
