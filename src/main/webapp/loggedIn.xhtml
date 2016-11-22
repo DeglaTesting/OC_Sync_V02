@@ -9,13 +9,13 @@
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>PrimeFaces</title>
+                <title>OC_Sync</title>
             </f:facet>
         </h:head>
         <h:body>
             <p:layout fullPage="true">
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    <h:form>
+                <p:layoutUnit position="north" style="border-color: transparent;" size="100">
+                    <h:form >
                         <p:menubar>
                             <p:submenu label="Welcome #{Logged.userName}"/>
                             <f:facet name="options">
@@ -24,10 +24,10 @@
                         </p:menubar>
                     </h:form>
                 </p:layoutUnit>
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    footer
+                <p:layoutUnit position="south" style="border-color: transparent;" size="100">
+                    <p:panel  style=" background-color: #607D8B;"  />
                 </p:layoutUnit>
-                <p:layoutUnit position="west" size="175">
+                <p:layoutUnit position="west" style="border-color: transparent;">
                     <h:form>
                         <p:menu model="#{UserStudiesList.model}"/>
                     </h:form>
