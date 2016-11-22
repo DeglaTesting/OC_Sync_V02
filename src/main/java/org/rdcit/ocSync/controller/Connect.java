@@ -26,7 +26,6 @@ public class Connect {
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection("jdbc:postgresql://" + this.confFileReader.getHost() + ":" + this.confFileReader.getPort() + "/" + this.confFileReader.getDb_name(), this.confFileReader.getDb_user_name(), this.confFileReader.getDb_user_pwd());
-            // System.out.println("~~~~~~~~~~~~~ jdbc:postgresql://"+connect.confFileReader.getHost()+":"+connect.confFileReader.getPort()+"/"+connect.confFileReader.getDb_name()+", "+connect.confFileReader.getDb_user_name()+", "+connect.confFileReader.getDb_user_pwd());
             if (connection != null) {
                 System.out.println("You made it, take control your database now!");
             } else {

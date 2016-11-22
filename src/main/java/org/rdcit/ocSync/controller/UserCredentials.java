@@ -59,13 +59,11 @@ public class UserCredentials {
         ListStudies_ws listStudies_ws = new ListStudies_ws(this.user);
         listStudies_ws.getUserStudyList();
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        //NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
         if (this.user.getlStudy().isEmpty()) {
             facesContext.getExternalContext().getSessionMap().put("logged", "noStudyFound.xhtml");
         } else {
             facesContext.getExternalContext().getSessionMap().put("logged", "userStudies.xhtml");
         }
-       // nh.handleNavigation(facesContext, null, "loggedIn.xhtml");
     }
 
 }

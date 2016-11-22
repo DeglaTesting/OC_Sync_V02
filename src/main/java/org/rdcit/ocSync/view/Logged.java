@@ -39,10 +39,6 @@ public class Logged {
         this.loggedPage = loggedPage;
     }
     
-    public String logout(){
-         FacesContext facesContext = FacesContext.getCurrentInstance();
-         facesContext.getExternalContext().invalidateSession();
-         return  "index.xhtml";
-    }
+    
 
 }

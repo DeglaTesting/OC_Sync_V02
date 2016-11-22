@@ -18,7 +18,6 @@ import javax.faces.event.ValueChangeEvent;
  */
 @ManagedBean(name = "OcInstance")
 @SessionScoped
-
 public class OcInstance implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,12 +33,11 @@ public class OcInstance implements Serializable {
 
     public void valueChangeMethod(ValueChangeEvent e) {
         if (e.getNewValue() == null) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Please choose an OC instance!!");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Please choose an OC instance first!");
             FacesContext.getCurrentInstance().addMessage(null, message);
         } else {
             this.instance = e.getNewValue().toString();
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("ocInstance", this.instance);
-            System.out.println("********************** +this.instance" +  FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("ocInstance"));
         }
 
     }

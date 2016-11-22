@@ -19,7 +19,7 @@
                         <p:menubar>
                             <p:submenu label="Welcome #{Logged.userName}"/>
                             <f:facet name="options">
-                                <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" action="#{Logged.logout()}"/>
+                                <p:commandButton type="submit" value="Logout" icon="ui-icon-extlink" action="#{UserLogin.logout()}"/>
                             </f:facet>
                         </p:menubar>
                     </h:form>

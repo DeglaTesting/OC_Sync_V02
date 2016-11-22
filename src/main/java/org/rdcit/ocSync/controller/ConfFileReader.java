@@ -30,7 +30,6 @@ public class ConfFileReader {
 
     public ConfFileReader() {
         ocInstance = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("ocInstance");
-        System.out.println("?????????????????????????????????? " + ocInstance);
         this.setsOcInstanceDBconf();
         this.setOcInstanceDBconf();
         host = this.ocInstanceDBconf[1];
@@ -42,7 +41,6 @@ public class ConfFileReader {
 
     public void setOcInstanceDBconf() {
         ocInstanceDBconf = this.sOcInstanceDBconf.split("\t");
-         System.out.println("********************** +ocInstanceDBconf.length" +ocInstanceDBconf.length);
     }
 
     public void setsOcInstanceDBconf() {
@@ -51,10 +49,8 @@ public class ConfFileReader {
             String sCurrentLine;
             br = new BufferedReader(new FileReader(this.confFile));
             while ((sCurrentLine = br.readLine()) != null) {
-                 System.out.println(sCurrentLine);
                 if (sCurrentLine.startsWith(this.ocInstance)) {
                     sOcInstanceDBconf = sCurrentLine;
-                    System.out.println("********************** sOcInstanceDBconf " +sOcInstanceDBconf);
                     break;
                 }
             }
