@@ -8,6 +8,7 @@ package org.rdcit.ocSync.controller;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.faces.application.FacesMessage;
 import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -38,15 +39,20 @@ public class UserCredentials {
     public boolean verifyCredentials() {
         try {
             Connect connect = new Connect();
-            PreparedStatement prepStmt = connect.openConnection().prepareStatement("SELECT user_id FROM user_account WHERE user_name = '" + this.userName + "' AND passwd = '" + this.password + "';");
+            PreparedStatement prepStmt = connect.openConnection().prepareStatement("SELECT run_webservices FROM user_account WHERE user_name = '" + this.userName + "' AND passwd = '" + this.password + "';");
             ResultSet rs = prepStmt.executeQuery();
             if (!rs.next()) {
                 System.out.println("NOT FOUND");
                 this.verifiy = false;
             } else {
                 this.verifiy = true;
-                user = new User(this.userName, this.password);
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
+                if (rs.getString("run_webservices").equals("t")) {
+                    user = new User(this.userName, this.password);
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
+                } else {
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Web Service Error", "Sorry, you are not authorized to use the web services.");
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                }
             }
 
         } catch (SQLException ex) {
