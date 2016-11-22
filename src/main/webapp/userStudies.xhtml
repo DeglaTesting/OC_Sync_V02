@@ -12,7 +12,7 @@
         <p:commandButton type="submit"  style=" margin: 40px" value="Reset" icon="ui-icon-arrowrefresh-1-w" update="@widgetVar(fileupload1)" 
                          action="#{UserClick.setFormLodder('Reset')}" ajax="false"/> 
         <p:commandButton type="submit" style=" margin: 20px" value="Map" icon="ui-icon-circle-triangle-e"
-                         actionListener="#{CollectingMetaData.doMapping()}" ajax="false"/> 
+                         actionListener="#{CollectingMetaData.doMapping()}" ajax="false" update="ui" widgetVar="map"/> 
 
         <ui:include src="#{UserClick.getFormLodder()}" id="ui"/> 
 

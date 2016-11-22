@@ -114,6 +114,7 @@ public class Mapper {
         } else {
             iftheymatch = false;
         }
+
         mappingRes[0] = lStructureModel;
         mappingRes[1] = lEmptyField;
         mappingRes[2] = iftheymatch;

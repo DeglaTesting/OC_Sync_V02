@@ -8,6 +8,7 @@ package org.rdcit.ocSync.ocws;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.xml.namespace.QName;
 import javax.xml.soap.MessageFactory;
@@ -31,6 +32,7 @@ import org.w3c.dom.NodeList;
  * @author sa841
  */
 @ManagedBean(name = "StudyMetaData_ws")
+@ViewScoped
 public class StudyMetaData_ws {
     
     List<StudyEvent> lTargetStudyEvent;
@@ -89,7 +91,8 @@ public class StudyMetaData_ws {
             NodeList nlMetaData = nODM.getChildNodes();
             StringToDocument stringToDocument = new StringToDocument(nlMetaData.item(0).getNodeValue());
             StudyMetaData targetStudyMetaData = new StudyMetaData();
-             lTargetStudyEvent = targetStudyMetaData.getStudyMetaData(stringToDocument.document);
+          //  lTargetStudyEvent = targetStudyMetaData.getStudyMetaData(stringToDocument.document);
+            setlTargetStudyEvent(targetStudyMetaData.getStudyMetaData(stringToDocument.document));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -102,7 +105,5 @@ public class StudyMetaData_ws {
     public void setlTargetStudyEvent(List<StudyEvent> lTargetStudyEvent) {
         this.lTargetStudyEvent = lTargetStudyEvent;
     }
-    
-    
-    
+
 }

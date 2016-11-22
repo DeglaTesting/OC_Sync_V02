@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
 import org.rdcit.ocSync.model.StudyEvent;
@@ -23,6 +24,7 @@ import org.rdcit.ocSync.model.StudyEvent;
  * @author sa841
  */
 @ManagedBean(name = "FileUpload")
+@ViewScoped
 public class FileUpload {
 
     public String sourcefilePath;
